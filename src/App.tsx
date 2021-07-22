@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
-import SearchUrl from './components/SearchUrl';
-import UserList from './components/UserList';
+import SearchUrl from './components/SearchUrl/SearchUrl';
+import UserList from './components/UserList/UserList';
 
 function App() {
   return (
