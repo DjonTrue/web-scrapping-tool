@@ -70,7 +70,7 @@
     "clearMocks": true,
     "collectCoverage": true,
     "setupFilesAfterEnv": [
-      "./config/setupTest.js"
+      "./src/setupTests.ts"
     ],
     "snapshotSerializers": [
       "./node_modules/enzyme-to-json/serializer"
