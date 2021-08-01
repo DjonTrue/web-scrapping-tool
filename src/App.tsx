@@ -6,7 +6,7 @@ import UserList from './components/UserList/UserList';
 function App() {
   return (
     <div className="App">
-      <UserList></UserList>
+      {/*<UserList></UserList>*/}
       <GameContainer />
     </div>
   );

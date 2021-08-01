@@ -1,30 +1,43 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { useTypesSelector } from '../../hooks/useTypedSelector'
 import { fetchGames } from '../../store/action-creators/gamesActions'
-import { UserState } from '../../types/user'
 
 const GameContainer = () => {
   const dispatch = useDispatch()
-  const {games, loading, error} = useTypesSelector(state => state.games)
+  const { games, loading, error } = useTypesSelector(state => state.games)
+  const [numberOfGamesOnPage, setNumberOfGamesOnPage] = useState(10)
 
-  console.log(games)
+  window.onscroll = paginateScroll;
+
   useEffect(() => {
-    dispatch(fetchGames()) 
+    dispatch(fetchGames())
   }, [dispatch])
+
+  function paginateScroll(event: any): void {
+    let windowBottom = document.documentElement.getBoundingClientRect().bottom;
+
+    if (windowBottom < document.documentElement.clientHeight + 100) {
+      setNumberOfGamesOnPage(amount => amount + 10)
+    }
+  }
+
+
+
 
   return (
     <div>
-      {games.map(game => game.id < 10 &&
-          <div>
-            <div> Developer : { game.developer}</div>
-            <div> Freetogame profile : { game.game_url}</div>
-            <div> Genre : { game.genre}</div>
-            <div> Genre : { game.genre}</div>
-            <div> Genre : { game.genre}</div>
-            <div> Genre : {game.genre}</div>
-            <img src={game.thumbnail} alt="games-pic" />
-          </div>
+      {games.map(game => game.id < numberOfGamesOnPage &&
+        <div>
+          <div> Title : {game.title}</div>
+          <div> Developer : {game.developer}</div>
+          <div> Freetogame profile : {game.game_url}</div>
+          <div> Platform : {game.platform}</div>
+          <div> Publisher : {game.publisher}</div>
+          <div> Release date : {game.release_date}</div>
+          <div> Genre : {game.genre}</div>
+          <img src={game.thumbnail} alt="games-pic" />
+        </div>
       )}
     </div>
   )
